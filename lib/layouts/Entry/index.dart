@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class Entry extends StatelessWidget {
-  String buttonText;
-  VoidCallback buttonCallback;
-  String infoText;
+  final String buttonText;
+  final VoidCallback buttonCallback;
+  final String infoText;
 
-  Entry(
+  const Entry(
       {required this.buttonText,
       required this.buttonCallback,
       required this.infoText,
@@ -23,9 +24,7 @@ class Entry extends StatelessWidget {
             Image.asset('./assets/images/logo.png'),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
+              onPressed: buttonCallback,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(45),
                 textStyle: const TextStyle(

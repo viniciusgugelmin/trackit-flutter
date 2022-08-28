@@ -10,7 +10,7 @@ class Login extends StatelessWidget {
       body: Entry(
         buttonText: 'Login',
         buttonCallback: () {
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/signup');
         },
         infoText: 'Don\'t have an account? Sign up',
       ),
