@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Entry/index.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
-
+class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Entry(
-        buttonText: 'Login',
+        buttonText: 'Signup',
         buttonCallback: () {
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/signup');
         },
-        infoText: 'Don\'t have an account? Sign up',
+        infoText: 'Already have an account? Login',
       ),
     );
   }
