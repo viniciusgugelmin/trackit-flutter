@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:trackit_flutter/pages/Login/index.dart';
 import 'package:trackit_flutter/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MainApp extends StatelessWidget {
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Trackit",
       routes: router.getRoutes(),
-      theme: ThemeData(backgroundColor: Colors.blue),
-      home: const Login(),
+      theme: ThemeData(backgroundColor: Colors.blue)
     );
   }
 }

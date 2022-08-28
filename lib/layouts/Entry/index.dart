@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class Entry extends StatelessWidget {
+class EntryLayout extends StatelessWidget {
   final String buttonText;
   final VoidCallback buttonCallback;
   final String infoText;
 
-  const Entry(
+  const EntryLayout(
       {required this.buttonText,
       required this.buttonCallback,
       required this.infoText,
