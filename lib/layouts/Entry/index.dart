@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/utils/Images/index.dart';
 
 @immutable
 class EntryLayout extends StatelessWidget {
@@ -15,13 +16,16 @@ class EntryLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ImagesUtils imagesUtils = ImagesUtils();
+    String logoPath = imagesUtils.getImagePath('logo.png');
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(left: 36, right: 36),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('./assets/images/logo.png'),
+            Image.asset(logoPath),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: buttonCallback,
