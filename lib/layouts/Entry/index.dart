@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trackit_flutter/utils/Images/index.dart';
+import 'package:trackit_flutter/utils/Image/index.dart';
 
-@immutable
 class EntryLayout extends StatelessWidget {
   final String buttonText;
   final VoidCallback buttonCallback;
@@ -20,8 +19,8 @@ class EntryLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ImagesUtils imagesUtils = ImagesUtils();
-    String logoPath = imagesUtils.getImagePath('logo.png');
+    ImageUtils imageUtils = ImageUtils();
+    String logoPath = imageUtils.getImagePath('logo.png');
 
     return Scaffold(
       body: Container(
@@ -47,13 +46,15 @@ class EntryLayout extends StatelessWidget {
                 child: Text(buttonText),
               ),
             ),
-            InkWell(
-              onTap: infoCallback,
-              child: Text(infoText,
-                  style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline)),
+            Flexible(
+              child: InkWell(
+                onTap: infoCallback,
+                child: Text(infoText,
+                    style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline)),
+              ),
             ),
           ],
         ),

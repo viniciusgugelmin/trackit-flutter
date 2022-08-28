@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Entry/index.dart';
+import 'package:trackit_flutter/pages/Login/widgets/LoginForm/index.dart';
+import 'package:trackit_flutter/pages/Signup/widgets/SignupForm/index.dart';
 import 'package:trackit_flutter/router.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
+  @override
+  SignupPageState createState() {
+    return SignupPageState();
+  }
+}
+
+class SignupPageState extends State<SignupPage> {
+  final _signupFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -11,73 +22,20 @@ class SignupPage extends StatelessWidget {
 
     return Scaffold(
       body: EntryLayout(
-        buttonText: 'Sign up',
-        buttonCallback: () {
-          router.goTo("Login");
-        },
-        infoCallback: () {
-          router.goTo("Login");
-        },
-        infoText: 'Already have an account? Log in!',
-        form: const SignupForm()
-      ),
+          buttonText: 'Sign up',
+          buttonCallback: onSubmit,
+          infoCallback: () {
+            router.goTo("Login");
+          },
+          infoText: 'Already have an account? Log in!',
+          form: SignupForm(signupFormKey: _signupFormKey)),
     );
   }
-}
 
-class SignupForm extends StatefulWidget {
-  const SignupForm({super.key});
-
-  @override
-  SignupFormState createState() {
-    return SignupFormState();
-  }
-}
-
-class SignupFormState extends State<SignupForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Email',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Password',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Confirm Password',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-        ],
-      ),
-    );
+  void onSubmit() {
+    if (_signupFormKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Processing Data')));
+    }
   }
 }

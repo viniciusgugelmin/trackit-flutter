@@ -13,9 +13,8 @@ class MainApp extends StatelessWidget {
     RouterApp router = RouterApp(context);
 
     return MaterialApp(
-      title: "Trackit",
-      routes: router.getRoutes(),
-      theme: ThemeData(backgroundColor: Colors.blue)
-    );
+        title: "Trackit",
+        routes: router.getRoutes(),
+        theme: ThemeData(backgroundColor: Colors.blue));
   }
 }

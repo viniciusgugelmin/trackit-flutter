@@ -30,9 +30,8 @@ class RouterApp {
   }
 
   void goTo(String name) {
-    var route = routes.firstWhere((r) => r['name'] == name, orElse: () => {
-      'path': '/'
-    });
+    var route = routes.firstWhere((r) => r['name'] == name,
+        orElse: () => {'path': '/'});
 
     Navigator.pushNamed(context, route['path'] as String);
   }
