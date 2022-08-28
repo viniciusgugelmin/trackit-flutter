@@ -7,12 +7,14 @@ class EntryLayout extends StatelessWidget {
   final VoidCallback buttonCallback;
   final VoidCallback infoCallback;
   final String infoText;
+  final Widget form;
 
   const EntryLayout(
       {required this.buttonText,
       required this.buttonCallback,
       required this.infoCallback,
       required this.infoText,
+      required this.form,
       Key? key})
       : super(key: key);
 
@@ -27,20 +29,24 @@ class EntryLayout extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(logoPath),
-            const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: buttonCallback,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(45),
-                textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            Container(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: Image.asset(logoPath)),
+            form,
+            Container(
+              padding: const EdgeInsets.only(bottom: 25),
+              child: ElevatedButton(
+                onPressed: buttonCallback,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(45),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                child: Text(buttonText),
               ),
-              child: Text(buttonText),
             ),
-            const SizedBox(height: 25),
             InkWell(
               onTap: infoCallback,
               child: Text(infoText,

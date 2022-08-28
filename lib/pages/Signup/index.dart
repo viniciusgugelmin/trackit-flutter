@@ -19,6 +19,64 @@ class SignupPage extends StatelessWidget {
           router.goTo("Login");
         },
         infoText: 'Already have an account? Log in!',
+        form: const SignupForm()
+      ),
+    );
+  }
+}
+
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
+
+  @override
+  SignupFormState createState() {
+    return SignupFormState();
+  }
+}
+
+class SignupFormState extends State<SignupForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Password',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Confirm Password',
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+        ],
       ),
     );
   }
