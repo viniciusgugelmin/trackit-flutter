@@ -11,11 +11,14 @@ class SignupPage extends StatelessWidget {
 
     return Scaffold(
       body: EntryLayout(
-        buttonText: 'Signup',
+        buttonText: 'Sign up',
         buttonCallback: () {
           router.goTo("Login");
         },
-        infoText: 'Already have an account? Login',
+        infoCallback: () {
+          router.goTo("Login");
+        },
+        infoText: 'Already have an account? Log in!',
       ),
     );
   }

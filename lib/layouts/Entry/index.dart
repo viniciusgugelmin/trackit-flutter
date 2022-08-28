@@ -5,11 +5,13 @@ import 'package:trackit_flutter/utils/Images/index.dart';
 class EntryLayout extends StatelessWidget {
   final String buttonText;
   final VoidCallback buttonCallback;
+  final VoidCallback infoCallback;
   final String infoText;
 
   const EntryLayout(
       {required this.buttonText,
       required this.buttonCallback,
+      required this.infoCallback,
       required this.infoText,
       Key? key})
       : super(key: key);
@@ -26,7 +28,7 @@ class EntryLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(logoPath),
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: buttonCallback,
               style: ElevatedButton.styleFrom(
@@ -38,7 +40,15 @@ class EntryLayout extends StatelessWidget {
               ),
               child: Text(buttonText),
             ),
-            Text(infoText)
+            const SizedBox(height: 25),
+            InkWell(
+              onTap: infoCallback,
+              child: Text(infoText,
+                  style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline)),
+            ),
           ],
         ),
       ),

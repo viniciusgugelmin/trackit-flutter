@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:trackit_flutter/pages/Login/index.dart';
 import 'package:trackit_flutter/pages/Signup/index.dart';
 
-
 class RouterApp {
   BuildContext context;
   var routes = [
@@ -22,7 +21,7 @@ class RouterApp {
 
   RouterApp(this.context);
 
-  getRoutes() {
+  Map<String, Widget Function(BuildContext)> getRoutes() {
     return {
       '/': (context) => const LoginPage(),
       '/login': (context) => const LoginPage(),
