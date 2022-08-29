@@ -1,7 +1,12 @@
 class FormUtils {
-  String? validator(field, value, [additionalValidators]) {
+  String? validator(String field, String? value, [List<Function>? additionalValidators]) {
+    print('validation $field $value');
     if (value == null || value.isEmpty) {
       return '$field cannot be empty';
+    }
+
+    if (additionalValidators == null) {
+      return null;
     }
 
     String? additionalError;

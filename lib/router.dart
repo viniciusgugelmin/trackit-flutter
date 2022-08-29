@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/pages/Home/index.dart';
 import 'package:trackit_flutter/pages/Login/index.dart';
 import 'package:trackit_flutter/pages/Signup/index.dart';
 
@@ -7,7 +8,7 @@ class RouterApp {
   var routes = [
     {
       'path': '/',
-      'name': 'Home',
+      'name': 'Opening',
     },
     {
       'path': '/login',
@@ -17,6 +18,10 @@ class RouterApp {
       'path': '/signup',
       'name': 'Signup',
     },
+    {
+      'path': '/home',
+      'name': 'Home',
+    }
   ];
 
   RouterApp(this.context);
@@ -26,6 +31,7 @@ class RouterApp {
       '/': (context) => const LoginPage(),
       '/login': (context) => const LoginPage(),
       '/signup': (context) => const SignupPage(),
+      '/home': (context) => const Home(),
     };
   }
 

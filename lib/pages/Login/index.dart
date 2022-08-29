@@ -22,7 +22,7 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: EntryLayout(
           buttonText: 'Log in',
-          buttonCallback: onSubmit,
+          buttonCallback: () => onSubmit(context),
           infoCallback: () {
             router.goTo("Signup");
           },
@@ -31,10 +31,10 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  void onSubmit() {
-    if (_loginFormKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Processing Data')));
-    }
+  void onSubmit(context) {
+    if (!_loginFormKey.currentState!.validate()) return;
+
+    RouterApp router = RouterApp(context);
+    router.goTo("Home");
   }
 }

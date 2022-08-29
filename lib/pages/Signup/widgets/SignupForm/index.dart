@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trackit_flutter/utils/Email/index.dart';
 import 'package:trackit_flutter/utils/Form/index.dart';
 import 'package:trackit_flutter/widgets/Form/index.dart';
+import 'package:trackit_flutter/widgets/TextField/index.dart';
 
 class SignupForm extends StatelessWidget {
   static const padding = EdgeInsets.only(bottom: 10);
@@ -17,45 +18,21 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FormUtils formUtils = FormUtils();
     EmailUtils emailUtils = EmailUtils();
 
     return FormApp(
       formKey: _signupFormKey,
       fieldsContainer: Column(
         children: <Widget>[
-          Container(
-            padding: padding,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'name',
-                border: border,
-              ),
-              validator: (value) =>
-                  formUtils.validator('Name', value),
-            ),
+          TextFieldApp(name: 'Name', labelText: 'email'),
+          TextFieldApp(
+            name: 'Email',
+            labelText: 'email',
+            additionalValidators: [
+              emailUtils.isEmail,
+            ],
           ),
-          Container(
-            padding: padding,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'email',
-                border: border,
-              ),
-              validator: (value) =>
-                  formUtils.validator('Email', value, [emailUtils.isEmail]),
-            ),
-          ),
-          Container(
-            padding: padding,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'password',
-                border: border,
-              ),
-              validator: (value) => formUtils.validator('Password', value),
-            ),
-          ),
+          TextFieldApp(name: 'Password', labelText: 'password')
         ],
       ),
     );

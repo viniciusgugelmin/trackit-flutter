@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/utils/Image/index.dart';
 
 class EntryLayout extends StatelessWidget {
@@ -52,7 +53,7 @@ class EntryLayout extends StatelessWidget {
                 child: Text(infoText,
                     style: const TextStyle(
                         fontSize: 13,
-                        color: Colors.blue,
+                        color: ColorsUtils.lightBlue,
                         decoration: TextDecoration.underline)),
               ),
             ),

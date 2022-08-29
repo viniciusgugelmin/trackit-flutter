@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vritualg.trackit_flutter">
    <application
-        android:label="trackit_flutter"
+        android:label="TrackIt"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
