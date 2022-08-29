@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trackit_flutter/pages/Home/index.dart';
+import 'package:trackit_flutter/pages/Habits/index.dart';
+import 'package:trackit_flutter/pages/Historic/index.dart';
+import 'package:trackit_flutter/pages/Today/index.dart';
 import 'package:trackit_flutter/pages/Login/index.dart';
 import 'package:trackit_flutter/pages/Signup/index.dart';
 
@@ -19,8 +21,16 @@ class RouterApp {
       'name': 'Signup',
     },
     {
-      'path': '/home',
-      'name': 'Home',
+      'path': '/habits',
+      'name': 'Habits',
+    },
+    {
+      'path': '/today',
+      'name': 'Today',
+    },
+    {
+      'path': '/historic',
+      'name': 'Historic',
     }
   ];
 
@@ -31,7 +41,9 @@ class RouterApp {
       '/': (context) => const LoginPage(),
       '/login': (context) => const LoginPage(),
       '/signup': (context) => const SignupPage(),
-      '/home': (context) => const Home(),
+      '/habits': (context) => const Habits(),
+      '/today': (context) => const Today(),
+      '/historic': (context) => const Historic(),
     };
   }
 

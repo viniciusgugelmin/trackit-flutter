@@ -35,6 +35,6 @@ class LoginPageState extends State<LoginPage> {
     if (!_loginFormKey.currentState!.validate()) return;
 
     RouterApp router = RouterApp(context);
-    router.goTo("Home");
+    router.goTo("Today");
   }
 }

@@ -27,7 +27,7 @@ class LoginForm extends StatelessWidget {
               additionalValidators: [
                 emailUtils.isEmail,
               ]),
-          TextFieldApp(name: 'Password', labelText: 'password'),
+          TextFieldApp(name: 'Password', labelText: 'password', isSecret: true),
         ],
       ),
     );

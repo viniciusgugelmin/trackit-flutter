@@ -32,7 +32,7 @@ class SignupForm extends StatelessWidget {
               emailUtils.isEmail,
             ],
           ),
-          TextFieldApp(name: 'Password', labelText: 'password')
+          TextFieldApp(name: 'Password', labelText: 'password', isSecret: true)
         ],
       ),
     );
