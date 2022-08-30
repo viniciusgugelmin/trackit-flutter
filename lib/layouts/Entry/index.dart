@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trackit_flutter/utils/Colors/index.dart';
+import 'package:trackit_flutter/layouts/Entry/widgets/CallbackButton/index.dart';
+import 'package:trackit_flutter/layouts/Entry/widgets/InfoText/index.dart';
 import 'package:trackit_flutter/utils/Image/index.dart';
 
 class EntryLayout extends StatelessWidget {
@@ -33,30 +34,9 @@ class EntryLayout extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 32),
                 child: Image.asset(logoPath)),
             form,
-            Container(
-              padding: const EdgeInsets.only(bottom: 25),
-              child: ElevatedButton(
-                onPressed: buttonCallback,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(45),
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                child: Text(buttonText),
-              ),
-            ),
-            GestureDetector(
-              child: InkWell(
-                onTap: infoCallback,
-                child: Text(infoText,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: ColorsUtils.lightBlue,
-                    )),
-              ),
-            ),
+            CallbackButton(
+                buttonCallback: buttonCallback, buttonText: buttonText),
+            InfoText(infoCallback: infoCallback, infoText: infoText),
           ],
         ),
       ),

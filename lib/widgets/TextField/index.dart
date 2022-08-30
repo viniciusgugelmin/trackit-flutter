@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/utils/Form/index.dart';
 
-@immutable
 class TextFieldApp extends StatelessWidget {
   final String name;
   final String labelText;
+  final Icon labelIcon;
   final bool isSecret;
   final List<Function>? additionalValidators;
 
@@ -20,10 +20,15 @@ class TextFieldApp extends StatelessWidget {
     Key? key,
     required this.name,
     required this.labelText,
+    required this.labelIcon,
     this.isSecret = false,
     this.additionalValidators,
   })
       : super(key: key);
+
+  bool isFocused(context) {
+    return FocusScope.of(context).hasFocus;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +44,12 @@ class TextFieldApp extends StatelessWidget {
           enableSuggestions: !isSecret,
           autocorrect: !isSecret,
           decoration: InputDecoration(
+            prefixIcon: labelIcon,
             labelText: labelText,
             border: border,
+            labelStyle: const TextStyle(
+              fontSize: 19,
+            ),
           ),
           validator: (value) => formUtils.validator(name, value, additionalValidators),
         ),

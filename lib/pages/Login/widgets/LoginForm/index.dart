@@ -24,10 +24,15 @@ class LoginForm extends StatelessWidget {
           TextFieldApp(
               name: 'Email',
               labelText: 'email',
+              labelIcon: const Icon(Icons.email),
               additionalValidators: [
                 emailUtils.isEmail,
               ]),
-          TextFieldApp(name: 'Password', labelText: 'password', isSecret: true),
+          TextFieldApp(
+              name: 'Password',
+              labelText: 'password',
+              labelIcon: const Icon(Icons.lock),
+              isSecret: true),
         ],
       ),
     );

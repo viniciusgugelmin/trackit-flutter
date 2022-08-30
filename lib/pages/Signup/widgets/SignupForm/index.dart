@@ -24,15 +24,23 @@ class SignupForm extends StatelessWidget {
       formKey: _signupFormKey,
       fieldsContainer: Column(
         children: <Widget>[
-          TextFieldApp(name: 'Name', labelText: 'email'),
+          TextFieldApp(
+              name: 'Name',
+              labelText: 'name',
+              labelIcon: const Icon(Icons.person)),
           TextFieldApp(
             name: 'Email',
             labelText: 'email',
+            labelIcon: const Icon(Icons.email),
             additionalValidators: [
               emailUtils.isEmail,
             ],
           ),
-          TextFieldApp(name: 'Password', labelText: 'password', isSecret: true)
+          TextFieldApp(
+              name: 'Password',
+              labelText: 'password',
+              labelIcon: const Icon(Icons.lock),
+              isSecret: true)
         ],
       ),
     );
