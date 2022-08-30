@@ -10,11 +10,4 @@ class User {
     required this.email,
     required this.password,
   });
-
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'email': email,
-    'password': password,
-  };
 }
