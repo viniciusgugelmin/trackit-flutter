@@ -63,6 +63,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/icon.png
     - assets/images/mini_logo.png
+    - assets/users.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -35,7 +35,27 @@ class LoggedLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Image.asset(miniLogoPath),
+          automaticallyImplyLeading: false,
+          title: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Image.asset(miniLogoPath, alignment: Alignment.centerLeft)),
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      icon: const Icon(Icons.exit_to_app),
+                      onPressed: () {
+                        router.goTo('/');
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           backgroundColor: ColorsUtils.darkBlue),
       body: body,
       backgroundColor: ColorsUtils.gray,

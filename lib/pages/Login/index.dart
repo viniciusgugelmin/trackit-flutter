@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/context/User/index.dart';
 import 'package:trackit_flutter/layouts/Entry/index.dart';
 import 'package:trackit_flutter/pages/Login/widgets/LoginForm/index.dart';
 import 'package:trackit_flutter/router.dart';
@@ -18,12 +19,13 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     RouterApp router = RouterApp(context);
+    UserContext userContext = UserContext();
 
     return Scaffold(
       body: EntryLayout(
           buttonText: 'Log in',
           buttonCallback: () => onSubmit(context),
-          infoCallback: () {
+          infoCallback: () async {
             router.goTo("Signup");
           },
           infoText: 'Don\'t have an account? Sign up!',

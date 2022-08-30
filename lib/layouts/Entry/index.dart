@@ -47,14 +47,14 @@ class EntryLayout extends StatelessWidget {
                 child: Text(buttonText),
               ),
             ),
-            Flexible(
+            GestureDetector(
               child: InkWell(
                 onTap: infoCallback,
                 child: Text(infoText,
                     style: const TextStyle(
-                        fontSize: 13,
-                        color: ColorsUtils.lightBlue,
-                        decoration: TextDecoration.underline)),
+                      fontSize: 13,
+                      color: ColorsUtils.lightBlue,
+                    )),
               ),
             ),
           ],
