@@ -3,7 +3,6 @@ import 'package:trackit_flutter/layouts/Logged/interfaces/IPage/index.dart';
 import 'package:trackit_flutter/layouts/Logged/widgets/AppBar/index.dart';
 import 'package:trackit_flutter/router.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
-import 'package:trackit_flutter/utils/Image/index.dart';
 
 class LoggedLayout extends StatelessWidget {
   final Widget body;

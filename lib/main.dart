@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/router.dart';
+import 'package:trackit_flutter/utils/Colors/index.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,6 +16,6 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
         title: "Trackit",
         routes: router.getRoutes(),
-        theme: ThemeData(backgroundColor: Colors.blue));
+        theme: ThemeData(backgroundColor: ColorsUtils.lightBlue));
   }
 }

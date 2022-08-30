@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Entry/index.dart';
 import 'package:trackit_flutter/pages/Login/widgets/LoginForm/index.dart';
 import 'package:trackit_flutter/router.dart';
+import 'package:trackit_flutter/widgets/Toast/index.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,7 +33,10 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void onSubmit(context) {
-    if (!_loginFormKey.currentState!.validate()) return;
+    if (!_loginFormKey.currentState!.validate()) {
+      ToastApp.show("Please check your inputs", duration: ToastApp.lengthLong);
+      return;
+    }
 
     RouterApp router = RouterApp(context);
     router.goTo("Today");
