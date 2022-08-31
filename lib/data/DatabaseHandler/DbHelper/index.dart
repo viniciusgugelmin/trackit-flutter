@@ -2,7 +2,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:trackit_flutter/models/User/index.dart';
-import 'package:trackit_flutter/repositories/Repositories/index.dart';
+import 'package:trackit_flutter/repositories/Sessions/index.dart';
 import 'dart:io' as io;
 
 import 'package:trackit_flutter/repositories/Users/index.dart';
@@ -20,7 +20,8 @@ class DbHelper {
   Future<UserModel> getLoginUser(String email, String password) async => await usersRepository.getLoginUser(db, email, password);
 
   Future<void> saveSession(UserModel user) async => await sessionsRepository.save(db, user);
-  Future<UserModel> getSessionUser(String token, String tableUsers) async => await sessionsRepository.getUser(db, token, tableUsers);
+  Future<UserModel> getSessionUser(String token) async => await sessionsRepository.getUser(db, token, UsersRepository.tableUsers);
+  Future<void> deleteSession(String token) async => await sessionsRepository.delete(db, token);
 
   Future<Database?> get db async {
     if (_db != null) {

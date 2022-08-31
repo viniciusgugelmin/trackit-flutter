@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/context/User/index.dart';
+import 'package:trackit_flutter/data/DatabaseHandler/DbHelper/index.dart';
 import 'package:trackit_flutter/router.dart';
 import 'package:trackit_flutter/utils/Image/index.dart';
 
 class AppBarApp extends StatelessWidget {
-  const AppBarApp({
+  UserContext userContext = UserContext();
+  late DbHelper dbHelper;
+
+  AppBarApp({
     Key? key
   }) : super(key: key);
 
@@ -27,7 +32,20 @@ class AppBarApp extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: IconButton(
                 icon: const Icon(Icons.exit_to_app),
-                onPressed: () {
+                onPressed: () async {
+                  dbHelper = DbHelper();
+
+                  String? token = await userContext.getToken();
+
+                  if (token != null) {
+                    dbHelper.deleteSession(token ).then((value) {
+                      userContext.clearToken();
+                      router.goTo('/');
+                    });
+                    return;
+                  }
+
+                  userContext.clearToken();
                   router.goTo('/');
                 },
               ),

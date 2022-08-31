@@ -4,13 +4,14 @@ import 'package:trackit_flutter/utils/Colors/index.dart';
 class ToastApp {
   static const Toast lengthLong = Toast.LENGTH_LONG;
   static const Toast lengthShort = Toast.LENGTH_SHORT;
+  static const ToastGravity gravityTop = ToastGravity.TOP;
   static const ToastGravity gravityCenter = ToastGravity.CENTER;
   static const ToastGravity gravityBottom = ToastGravity.BOTTOM;
 
   static void show(String message,
       {String type = "success",
       Toast length = lengthLong,
-      ToastGravity gravity = gravityBottom}) {
+      ToastGravity gravity = gravityTop}) {
     int timeInSecForIosWeb = (length == lengthLong) ? 5 : 1;
 
     Fluttertoast.showToast(

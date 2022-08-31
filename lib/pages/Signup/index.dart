@@ -46,7 +46,11 @@ class SignupPageState extends State<SignupPage> {
       await dbHelper.saveUser(user);
     } catch (e) {
       print("Signup: $e");
-      ToastApp.show("An error occured while saving the user", type: "error");
+      ToastApp.show(
+          e.toString().contains("Signup failed!")
+              ? e.toString().replaceAll("Exception:", "")
+              : "An error occured while saving the user",
+          type: "error");
       return;
     }
 

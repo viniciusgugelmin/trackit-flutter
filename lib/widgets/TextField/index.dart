@@ -41,7 +41,7 @@ class TextFieldApp extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(
           primaryColor: ColorsUtils.lightBlue,
-          hintColor: ColorsUtils.gray,
+          hintColor: ColorsUtils.lightGray,
         ),
         child: TextFormField(
           controller: controller,

@@ -31,7 +31,7 @@ class SessionsRepository {
     await dbClient?.insert(tableSessions, session.toMap());
 
     UserContext userContext = UserContext();
-    userContext.saveToken(token);
+    userContext.setToken(token);
   }
 
   Future<UserModel> getUser(Future<Database?> db, String token, String tableUsers) async {
@@ -54,5 +54,17 @@ class SessionsRepository {
     UserModel user = UserModel.fromMap(resUser.first);
 
     return user;
+  }
+
+  Future<void> delete(Future<Database?> db, String token) async {
+    Database? dbClient = await db;
+
+    var res = await dbClient?.query(tableSessions, where: "$db_token = '$token'");
+
+    if (res == null || res.isEmpty) {
+      return;
+    }
+
+    await dbClient?.delete(tableSessions, where: "$db_token = '$token'");
   }
 }

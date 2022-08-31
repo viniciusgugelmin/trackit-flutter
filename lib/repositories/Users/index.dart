@@ -1,9 +1,7 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:trackit_flutter/context/User/index.dart';
-import 'package:trackit_flutter/models/User/index.dart';
 import 'package:crypt/crypt.dart';
-import 'package:trackit_flutter/repositories/Repositories/index.dart';
-import 'package:uuid/uuid.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:trackit_flutter/models/User/index.dart';
+import 'package:trackit_flutter/repositories/Sessions/index.dart';
 
 class UsersRepository {
   static const String tableUsers = 'users';
@@ -27,6 +25,12 @@ class UsersRepository {
   Future<UserModel> save(Future<Database?> db, UserModel user) async {
     Database? dbClient = await db;
 
+    var userWithEmail = await dbClient?.query(tableUsers, where: "$db_email = '$user.email'");
+
+    if (userWithEmail != null && userWithEmail.isNotEmpty) {
+      return throw Exception("Signup failed! User with email '${user.email}' already exists");
+    }
+
     String hashedPassword = Crypt.sha256(user.password).toString();
     user.password = hashedPassword;
 
@@ -42,7 +46,7 @@ class UsersRepository {
     var res = await dbClient?.query(tableUsers, where: "$db_email = '$email'");
 
     if (res == null || res.isEmpty) {
-      throw Exception("Login failed! User not found");
+      throw Exception("Login failed! Incorrect email or password");
     }
 
     UserModel user = UserModel.fromMap(res.first);
@@ -51,7 +55,7 @@ class UsersRepository {
         await Future.value(Crypt(user.password).match(password));
 
     if (!isPasswordValid) {
-      throw Exception('Login failed! Password is not valid');
+      throw Exception('Login failed! Incorrect email or password');
     }
 
     SessionsRepository sessionsRepository = SessionsRepository();

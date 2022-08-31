@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/context/User/index.dart';
 import 'package:trackit_flutter/layouts/Entry/widgets/CallbackButton/index.dart';
 import 'package:trackit_flutter/layouts/Entry/widgets/InfoText/index.dart';
+import 'package:trackit_flutter/router.dart';
 import 'package:trackit_flutter/utils/Image/index.dart';
 
 class EntryLayout extends StatelessWidget {
+  UserContext userContext = UserContext();
   final String buttonText;
   final VoidCallback buttonCallback;
   final VoidCallback infoCallback;
   final String infoText;
   final Widget form;
 
-  const EntryLayout(
+  EntryLayout(
       {required this.buttonText,
       required this.buttonCallback,
       required this.infoCallback,
@@ -21,6 +24,9 @@ class EntryLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RouterApp router = RouterApp(context);
+    userContext.getToken().then((value) => value != null ? router.goTo('Today') : null);
+
     ImageUtils imageUtils = ImageUtils();
     String logoPath = imageUtils.getImagePath('logo.png');
 

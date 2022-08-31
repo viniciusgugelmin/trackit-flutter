@@ -7,7 +7,7 @@ class UserContext {
     storage = const FlutterSecureStorage();
   }
 
-  void saveToken(String token) {
+  void setToken(String token) {
     storage.write(key: "token", value: token);
   }
 
@@ -19,5 +19,9 @@ class UserContext {
     }
 
     return token;
+  }
+
+  void clearToken() {
+    storage.delete(key: "token");
   }
 }

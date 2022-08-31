@@ -31,7 +31,7 @@ class RouterApp {
     {
       'path': '/today',
       'name': 'Today',
-      'page': TodayPage(),
+      'page': const TodayPage(),
     },
     {
       'path': '/historic',
@@ -44,6 +44,7 @@ class RouterApp {
 
   Map<String, Widget Function(BuildContext)> getRoutes() {
     Map<String, Widget Function(BuildContext)> routesToReturn = {};
+
 
     for (var route in routes) {
       routesToReturn[route['path'] as String] = (BuildContext context) => route['page'] as Widget;

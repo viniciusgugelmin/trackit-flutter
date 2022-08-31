@@ -25,7 +25,7 @@ class LoggedLayout extends StatelessWidget {
 
     dbHelper = DbHelper();
     try {
-      UserModel user = await dbHelper.getSessionUser(value, 'users');
+      UserModel user = await dbHelper.getSessionUser(value);
       print(user.name);
     } catch (e) {
       print("Get: $e");
@@ -63,10 +63,14 @@ class LoggedLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const AppBarApp(),
+          title: AppBarApp(),
           backgroundColor: ColorsUtils.darkBlue),
-      body: body,
-      backgroundColor: ColorsUtils.gray,
+      body: SingleChildScrollView(
+          child: Container(
+              padding: const EdgeInsets.only(
+                  top: 28, left: 18, right: 18, bottom: 18),
+              child: body)),
+      backgroundColor: ColorsUtils.lightGray,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageNumber,
         backgroundColor: ColorsUtils.white,
