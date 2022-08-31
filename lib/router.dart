@@ -11,46 +11,55 @@ class RouterApp {
     {
       'path': '/',
       'name': 'Opening',
+      'page': const LoginPage(),
     },
     {
       'path': '/login',
       'name': 'Login',
+      'page': const LoginPage(),
     },
     {
       'path': '/signup',
       'name': 'Signup',
+      'page': const SignupPage(),
     },
     {
       'path': '/habits',
       'name': 'Habits',
+      'page': const HabitsPage(),
     },
     {
       'path': '/today',
       'name': 'Today',
+      'page': TodayPage(),
     },
     {
       'path': '/historic',
       'name': 'Historic',
+      'page': const HistoricPage(),
     }
   ];
 
   RouterApp(this.context);
 
   Map<String, Widget Function(BuildContext)> getRoutes() {
-    return {
-      '/': (context) => const LoginPage(),
-      '/login': (context) => const LoginPage(),
-      '/signup': (context) => const SignupPage(),
-      '/habits': (context) => const Habits(),
-      '/today': (context) => const Today(),
-      '/historic': (context) => const Historic(),
-    };
+    Map<String, Widget Function(BuildContext)> routesToReturn = {};
+
+    for (var route in routes) {
+      routesToReturn[route['path'] as String] = (BuildContext context) => route['page'] as Widget;
+    }
+
+    return routesToReturn;
   }
 
   void goTo(String name) {
     var route = routes.firstWhere((r) => r['name'] == name,
-        orElse: () => {'path': '/'});
+        orElse: () => routes[0]);
 
-    Navigator.pushNamed(context, route['path'] as String);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => route['page'] as Widget),
+        (route) => false);
   }
 }

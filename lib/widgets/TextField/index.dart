@@ -3,10 +3,12 @@ import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/utils/Form/index.dart';
 
 class TextFieldApp extends StatelessWidget {
+  TextEditingController? controller;
   final String name;
   final String labelText;
   final Icon labelIcon;
   final bool isSecret;
+  final TextInputType inputType;
   final List<Function>? additionalValidators;
 
   final EdgeInsets padding = const EdgeInsets.only(bottom: 10);
@@ -22,7 +24,9 @@ class TextFieldApp extends StatelessWidget {
     required this.labelText,
     required this.labelIcon,
     this.isSecret = false,
+    this.inputType = TextInputType.text,
     this.additionalValidators,
+    this.controller
   })
       : super(key: key);
 
@@ -40,6 +44,8 @@ class TextFieldApp extends StatelessWidget {
           hintColor: ColorsUtils.gray,
         ),
         child: TextFormField(
+          controller: controller,
+          keyboardType: inputType,
           obscureText: isSecret,
           enableSuggestions: !isSecret,
           autocorrect: !isSecret,
@@ -52,6 +58,7 @@ class TextFieldApp extends StatelessWidget {
             ),
           ),
           validator: (value) => formUtils.validator(name, value, additionalValidators),
+          onSaved: (value) => controller?.text = value ?? '',
         ),
       ),
     );

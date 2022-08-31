@@ -1,23 +1,27 @@
-import 'package:toast/toast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
 
 class ToastApp {
-  static const lengthLong = Toast.lengthLong;
-  static const lengthShort = Toast.lengthShort;
-  static const bottom = Toast.bottom;
-
-  static init(context) {
-    ToastContext toastContext = ToastContext();
-    toastContext.init(context);
-  }
-
+  static const Toast lengthLong = Toast.LENGTH_LONG;
+  static const Toast lengthShort = Toast.LENGTH_SHORT;
+  static const ToastGravity gravityCenter = ToastGravity.CENTER;
+  static const ToastGravity gravityBottom = ToastGravity.BOTTOM;
 
   static void show(String message,
-      {int duration = lengthShort, int gravity = bottom}) {
-    Toast.show(message,
-        duration: duration,
-        gravity: gravity,
-        backgroundColor: ColorsUtils.darkBlue,
-        webTexColor: ColorsUtils.white);
+      {String type = "success",
+      Toast length = lengthLong,
+      ToastGravity gravity = gravityBottom}) {
+    int timeInSecForIosWeb = (length == lengthLong) ? 5 : 1;
+
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: length,
+      gravity: gravity,
+      timeInSecForIosWeb: timeInSecForIosWeb,
+      backgroundColor: type == "success" ? ColorsUtils.darkBlue : ColorsUtils.red,
+      textColor: ColorsUtils.white,
+      fontSize: 16.0,
+      webBgColor: type == "success" ? "#126BA5" : "#F44336",
+    );
   }
 }

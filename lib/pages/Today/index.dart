@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Logged/index.dart';
 
-class Today extends StatelessWidget {
-  const Today({Key? key}) : super(key: key);
+class TodayPage extends StatelessWidget {
+  const TodayPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const LoggedLayout(
+    return LoggedLayout(
       page: 'Today',
-      body: Center(
+      body: const Center(
         child: Text('Today'),
       ),
     );

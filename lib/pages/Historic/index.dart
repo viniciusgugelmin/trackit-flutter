@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Logged/index.dart';
 
-class Historic extends StatelessWidget {
-  const Historic({Key? key}) : super(key: key);
+class HistoricPage extends StatelessWidget {
+  const HistoricPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const LoggedLayout(
+    return LoggedLayout(
       page: 'Historic',
-      body: Center(
+      body: const Center(
         child: Text('Historic'),
       ),
     );

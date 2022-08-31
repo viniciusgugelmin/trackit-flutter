@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/context/User/index.dart';
+import 'package:trackit_flutter/data/DatabaseHandler/DbHelper/index.dart';
 import 'package:trackit_flutter/layouts/Logged/interfaces/IPage/index.dart';
 import 'package:trackit_flutter/layouts/Logged/widgets/AppBar/index.dart';
+import 'package:trackit_flutter/models/User/index.dart';
 import 'package:trackit_flutter/router.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
+import 'package:trackit_flutter/widgets/Toast/index.dart';
 
 class LoggedLayout extends StatelessWidget {
+  UserContext userContext = UserContext();
+  late DbHelper dbHelper;
+
   final Widget body;
   final String page;
 
-  const LoggedLayout({Key? key, required this.body, required this.page})
+  LoggedLayout({Key? key, required this.body, required this.page})
       : super(key: key);
+
+  Future<void> checkContext(value, context) async {
+    RouterApp router = RouterApp(context);
+
+    if (value == null) router.goTo('/');
+
+    dbHelper = DbHelper();
+    try {
+      UserModel user = await dbHelper.getSessionUser(value, 'users');
+      print(user.name);
+    } catch (e) {
+      print("Get: $e");
+      ToastApp.show(
+          e.toString().contains("Get user failed!")
+              ? e.toString().replaceAll("Exception:", "")
+              : "An error occured while getting user",
+          type: "error");
+      router.goTo('/');
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    userContext.getToken().then((value) => checkContext(value, context));
     RouterApp router = RouterApp(context);
 
     List<IPage> pagesName = [
