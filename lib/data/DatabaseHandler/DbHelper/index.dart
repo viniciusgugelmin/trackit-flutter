@@ -35,6 +35,7 @@ class DbHelper {
 
   Future<Database> init() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    print('db path: ${documentsDirectory.path}');
     String path = join(documentsDirectory.path, dbName);
 
     if (false) {

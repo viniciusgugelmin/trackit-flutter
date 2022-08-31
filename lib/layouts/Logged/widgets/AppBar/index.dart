@@ -35,17 +35,19 @@ class AppBarApp extends StatelessWidget {
                 onPressed: () async {
                   dbHelper = DbHelper();
 
-                  String? token = await userContext.getToken();
+                  String? token = (await userContext.getToken())!['token'];
 
                   if (token != null) {
                     dbHelper.deleteSession(token ).then((value) {
                       userContext.clearToken();
+                      userContext.clearUser();
                       router.goTo('/');
                     });
                     return;
                   }
 
                   userContext.clearToken();
+                  userContext.clearUser();
                   router.goTo('/');
                 },
               ),

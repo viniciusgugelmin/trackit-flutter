@@ -9,6 +9,8 @@ import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/widgets/Toast/index.dart';
 
 class LoggedLayout extends StatelessWidget {
+  UserModel? loggedInUser;
+
   UserContext userContext = UserContext();
   late DbHelper dbHelper;
 
@@ -18,15 +20,19 @@ class LoggedLayout extends StatelessWidget {
   LoggedLayout({Key? key, required this.body, required this.page})
       : super(key: key);
 
-  Future<void> checkContext(value, context) async {
+  Future<UserModel?> checkContext(Map<String, dynamic>? value, context) async {
     RouterApp router = RouterApp(context);
 
-    if (value == null) router.goTo('/');
+    if (value == null || value['token'] == null) {
+      router.goTo('/');
+      return null;
+    }
 
     dbHelper = DbHelper();
     try {
-      UserModel user = await dbHelper.getSessionUser(value);
-      print(user.name);
+      UserModel user = await dbHelper.getSessionUser(value['token']);
+      userContext.setUser(user);
+      return user;
     } catch (e) {
       print("Get: $e");
       ToastApp.show(
@@ -35,13 +41,15 @@ class LoggedLayout extends StatelessWidget {
               : "An error occured while getting user",
           type: "error");
       router.goTo('/');
-      return;
     }
+
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    userContext.getToken().then((value) => checkContext(value, context));
+    userContext.getToken().then(
+        (value) async => {loggedInUser = await checkContext(value, context)});
     RouterApp router = RouterApp(context);
 
     List<IPage> pagesName = [
@@ -66,10 +74,11 @@ class LoggedLayout extends StatelessWidget {
           title: AppBarApp(),
           backgroundColor: ColorsUtils.darkBlue),
       body: SingleChildScrollView(
-          child: Container(
-              padding: const EdgeInsets.only(
-                  top: 28, left: 18, right: 18, bottom: 18),
-              child: body)),
+        child: Container(
+            padding:
+                const EdgeInsets.only(top: 28, left: 18, right: 18, bottom: 18),
+            child: body),
+      ),
       backgroundColor: ColorsUtils.lightGray,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageNumber,

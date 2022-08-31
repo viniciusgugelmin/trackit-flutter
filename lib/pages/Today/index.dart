@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Logged/index.dart';
 import 'package:intl/intl.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
+import 'package:trackit_flutter/widgets/Title/index.dart';
 
 class TodayPage extends StatelessWidget {
   const TodayPage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class TodayPage extends StatelessWidget {
       },
     ];
 
-    double completedHabits = 100.0;
+    const completedHabits = 100.0;
     String completedHabitsMessages = '${completedHabits.toStringAsFixed(0)}% of habits completed';
 
     if (completedHabits == 100.0) {
@@ -39,27 +40,14 @@ class TodayPage extends StatelessWidget {
       page: 'Today',
       body: Column(
         children: [
-          Row(
-            children: [
-              Flexible(
-                child: Text(
-                  "$formattedDateWeekday, $formattedDate",
-                  style: const TextStyle(
-                    color: ColorsUtils.darkBlue,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              )
-            ],
-          ),
+          TitleApp("$formattedDateWeekday, $formattedDate"),
           Row(
             children: [
               Flexible(
                 child: Text(
                   completedHabitsMessages,
                   style: const TextStyle(
-                    color: ColorsUtils.darkGray,
+                    color: completedHabits == 0.0 ? ColorsUtils.darkGray : ColorsUtils.green,
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),

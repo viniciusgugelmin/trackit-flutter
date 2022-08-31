@@ -32,6 +32,7 @@ class SessionsRepository {
 
     UserContext userContext = UserContext();
     userContext.setToken(token);
+    userContext.setUser(user);
   }
 
   Future<UserModel> getUser(Future<Database?> db, String token, String tableUsers) async {
