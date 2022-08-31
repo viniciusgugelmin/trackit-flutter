@@ -34,11 +34,13 @@
 
 ## 📋 About The Project
 
-// todo: add description
+Application to track your daily habits. Include registration and login.
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-2E76FF?style=for-the-badge&logo=dart&logoColor=white)
+![SQlite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
 
-// todo: add languages and frameworks
 
 ## 🏁 Usage
 
@@ -50,7 +52,17 @@ $ git clone https://github.com/viniciusgugelmin/trackit-flutter
 $ cd trackit-flutter
 ```
 
-// todo: add usage
+Install dependencies
+
+```bash
+$ flutter pub get
+```
+
+Run the application
+
+```bash
+$ flutter run
+```
 
 ## 💻 Contributing
 
