@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:trackit_flutter/layouts/Logged/index.dart';
 import 'package:intl/intl.dart';
+import 'package:trackit_flutter/models/User/index.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/widgets/Title/index.dart';
 
-class TodayPage extends StatelessWidget {
+class TodayPage extends StatefulWidget {
   const TodayPage({Key? key}) : super(key: key);
+
+  @override
+  State<TodayPage> createState() => _TodayPageState();
+}
+
+class _TodayPageState extends State<TodayPage> {
+  UserModel? loggedInUser;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,8 @@ class TodayPage extends StatelessWidget {
     ];
 
     const completedHabits = 100.0;
-    String completedHabitsMessages = '${completedHabits.toStringAsFixed(0)}% of habits completed';
+    String completedHabitsMessages =
+        '${completedHabits.toStringAsFixed(0)}% of habits completed';
 
     if (completedHabits == 100.0) {
       completedHabitsMessages = 'All habits completed';
@@ -36,10 +45,25 @@ class TodayPage extends StatelessWidget {
       completedHabitsMessages = 'No habits completed';
     }
 
+    String welcomeMessage =
+        loggedInUser != null ? 'Hello, ${loggedInUser?.name}\n' : '';
+
     return LoggedLayout(
       page: 'Today',
+      getUser: (user) {
+        setState(() {
+          loggedInUser = user;
+        });
+      },
       body: Column(
         children: [
+          Row(children: [
+            Flexible(
+              child: Text(welcomeMessage,
+                  style:
+                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ColorsUtils.darkerGray)),
+            ),
+          ]),
           TitleApp("$formattedDateWeekday, $formattedDate"),
           Row(
             children: [
@@ -47,7 +71,9 @@ class TodayPage extends StatelessWidget {
                 child: Text(
                   completedHabitsMessages,
                   style: const TextStyle(
-                    color: completedHabits == 0.0 ? ColorsUtils.darkGray : ColorsUtils.green,
+                    color: completedHabits == 0.0
+                        ? ColorsUtils.darkGray
+                        : ColorsUtils.green,
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),

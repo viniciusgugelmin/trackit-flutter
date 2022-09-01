@@ -8,17 +8,23 @@ import 'package:trackit_flutter/router.dart';
 import 'package:trackit_flutter/utils/Colors/index.dart';
 import 'package:trackit_flutter/widgets/Toast/index.dart';
 
-class LoggedLayout extends StatelessWidget {
+class LoggedLayout extends StatefulWidget {
+  final Widget body;
+  final String page;
+  Function? getUser;
+
+  LoggedLayout({Key? key, required this.body, required this.page, this.getUser}) : super(key: key);
+
+  @override
+  State<LoggedLayout> createState() => _LoggedLayoutState();
+}
+
+class _LoggedLayoutState extends State<LoggedLayout> {
   UserModel? loggedInUser;
 
   UserContext userContext = UserContext();
+
   late DbHelper dbHelper;
-
-  final Widget body;
-  final String page;
-
-  LoggedLayout({Key? key, required this.body, required this.page})
-      : super(key: key);
 
   Future<UserModel?> checkContext(Map<String, dynamic>? value, context) async {
     RouterApp router = RouterApp(context);
@@ -47,9 +53,21 @@ class LoggedLayout extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    userContext.getUser().then((user) {
+      setState(() {
+        loggedInUser = user;
+
+        if (widget.getUser != null) {
+          widget.getUser!(user);
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    userContext.getToken().then(
-        (value) async => {loggedInUser = await checkContext(value, context)});
     RouterApp router = RouterApp(context);
 
     List<IPage> pagesName = [
@@ -59,7 +77,7 @@ class LoggedLayout extends StatelessWidget {
     ];
     List<BottomNavigationBarItem> pages = [];
     int pageNumber = 0;
-    pageNumber = pagesName.indexWhere((element) => element.name == page);
+    pageNumber = pagesName.indexWhere((element) => element.name == widget.page);
 
     for (IPage page in pagesName) {
       pages.add(BottomNavigationBarItem(
@@ -77,7 +95,7 @@ class LoggedLayout extends StatelessWidget {
         child: Container(
             padding:
                 const EdgeInsets.only(top: 28, left: 18, right: 18, bottom: 18),
-            child: body),
+            child: widget.body),
       ),
       backgroundColor: ColorsUtils.lightGray,
       bottomNavigationBar: BottomNavigationBar(
