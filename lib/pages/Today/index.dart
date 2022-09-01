@@ -25,16 +25,6 @@ class _TodayPageState extends State<TodayPage> {
     String formattedDate = formatter.format(now);
     String formattedDateWeekday = formatterWeekday.format(now);
 
-    const habits = [
-      {
-        'name': 'Wake up early',
-        'description': 'Wake up early',
-        'icon': 'assets/images/icons/icon_wakeup.png',
-        'color': ColorsUtils.darkBlue,
-        'progress': 0.5,
-      },
-    ];
-
     const completedHabits = 100.0;
     String completedHabitsMessages =
         '${completedHabits.toStringAsFixed(0)}% of habits completed';

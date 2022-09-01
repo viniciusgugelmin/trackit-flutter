@@ -71,8 +71,8 @@ class _LoggedLayoutState extends State<LoggedLayout> {
     RouterApp router = RouterApp(context);
 
     List<IPage> pagesName = [
-      const IPage('Habits', Icon(Icons.sunny)),
-      const IPage('Today', Icon(Icons.task_rounded)),
+      const IPage('Habits', Icon(Icons.task_rounded)),
+      const IPage('Today', Icon(Icons.sunny)),
       const IPage('Historic', Icon(Icons.calendar_month)),
     ];
     List<BottomNavigationBarItem> pages = [];

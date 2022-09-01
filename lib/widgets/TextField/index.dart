@@ -23,10 +23,10 @@ class TextFieldApp extends StatelessWidget {
     required this.name,
     required this.labelText,
     required this.labelIcon,
+    required this.controller,
     this.isSecret = false,
     this.inputType = TextInputType.text,
     this.additionalValidators,
-    this.controller
   })
       : super(key: key);
 
