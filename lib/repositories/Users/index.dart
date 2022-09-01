@@ -25,7 +25,7 @@ class UsersRepository {
   Future<UserModel> save(Future<Database?> db, UserModel user) async {
     Database? dbClient = await db;
 
-    var userWithEmail = await dbClient?.query(tableUsers, where: "$db_email = '$user.email'");
+    var userWithEmail = await dbClient?.query(tableUsers, where: "$db_email = '${user.email}'");
 
     if (userWithEmail != null && userWithEmail.isNotEmpty) {
       return throw Exception("Signup failed! User with email '${user.email}' already exists");

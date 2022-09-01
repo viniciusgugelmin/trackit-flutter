@@ -31,19 +31,21 @@ class EntryLayout extends StatelessWidget {
     String logoPath = imageUtils.getImagePath('logo.png');
 
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(left: 36, right: 36),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                padding: const EdgeInsets.only(bottom: 32),
-                child: Image.asset(logoPath)),
-            form,
-            CallbackButton(
-                buttonCallback: buttonCallback, buttonText: buttonText),
-            InfoText(infoCallback: infoCallback, infoText: infoText),
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(left: 36, right: 36),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  child: Image.asset(logoPath)),
+              form,
+              CallbackButton(
+                  buttonCallback: buttonCallback, buttonText: buttonText),
+              InfoText(infoCallback: infoCallback, infoText: infoText),
+            ],
+          ),
         ),
       ),
     );
