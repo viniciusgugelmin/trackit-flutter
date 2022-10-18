@@ -9,7 +9,7 @@ class NoHabits extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 17),
+      padding: const EdgeInsets.only(top: 27),
       child: Row(
         children: const [
           Flexible(
