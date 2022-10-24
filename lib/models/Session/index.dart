@@ -9,7 +9,7 @@ class SessionModel {
     id = const Uuid().v4();
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'token': token,

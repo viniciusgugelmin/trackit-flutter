@@ -11,7 +11,7 @@ class UserContext {
   }
 
   void setUser(UserModel user) {
-    storage.write(key: 'user', value: json.encode(user.toMap()));
+    storage.write(key: 'user', value: json.encode(user.toJson()));
   }
 
   Future<UserModel?> getUser() async {

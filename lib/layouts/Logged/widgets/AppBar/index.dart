@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trackit_flutter/context/Habit/index.dart';
 import 'package:trackit_flutter/context/User/index.dart';
 import 'package:trackit_flutter/data/DatabaseHandler/DbHelper/index.dart';
 import 'package:trackit_flutter/router.dart';
@@ -6,6 +7,7 @@ import 'package:trackit_flutter/utils/Image/index.dart';
 
 class AppBarApp extends StatelessWidget {
   UserContext userContext = UserContext();
+  HabitContext habitContext = HabitContext();
   late DbHelper dbHelper;
 
   AppBarApp({
@@ -41,6 +43,8 @@ class AppBarApp extends StatelessWidget {
                     dbHelper.deleteSession(token ).then((value) {
                       userContext.clearToken();
                       userContext.clearUser();
+                      habitContext.clearHabits();
+
                       router.goTo('/');
                     });
                     return;
@@ -48,6 +52,7 @@ class AppBarApp extends StatelessWidget {
 
                   userContext.clearToken();
                   userContext.clearUser();
+                  habitContext.clearHabits();
                   router.goTo('/');
                 },
               ),

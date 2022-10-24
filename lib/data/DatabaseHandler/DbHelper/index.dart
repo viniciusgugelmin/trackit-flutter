@@ -1,20 +1,24 @@
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:mongo_dart/mongo_dart.dart';
+import 'package:trackit_flutter/constants.dart';
+import 'package:trackit_flutter/models/Habit/index.dart';
+import 'package:trackit_flutter/models/HabitUser/index.dart';
 import 'package:trackit_flutter/models/User/index.dart';
+import 'package:trackit_flutter/repositories/HabitUser/index.dart';
+import 'package:trackit_flutter/repositories/Habits/index.dart';
 import 'package:trackit_flutter/repositories/Sessions/index.dart';
-import 'dart:io' as io;
 
 import 'package:trackit_flutter/repositories/Users/index.dart';
 
 class DbHelper {
-  static Database? _db;
+  static Db? _db;
 
   static const dbName = 'trackit.db';
   static const int version = 1;
 
   static UsersRepository usersRepository = UsersRepository();
   static SessionsRepository sessionsRepository = SessionsRepository();
+  static HabitsRepository habitsRepository = HabitsRepository();
+  static HabitUserRepository habitUserRepository = HabitUserRepository();
 
   Future<UserModel> saveUser(UserModel user) async => await usersRepository.save(db, user);
   Future<UserModel> getLoginUser(String email, String password) async => await usersRepository.getLoginUser(db, email, password);
@@ -23,7 +27,16 @@ class DbHelper {
   Future<UserModel> getSessionUser(String token) async => await sessionsRepository.getUser(db, token, UsersRepository.tableUsers);
   Future<void> deleteSession(String token) async => await sessionsRepository.delete(db, token);
 
-  Future<Database?> get db async {
+  Future<void> saveHabit(HabitModel habit) async => await habitsRepository.save(db, habit);
+  Future<List<HabitModel>> getByUserId(String userId) async => await habitsRepository.getByUserId(db, userId);
+  Future<List<HabitModel>> getByUserIdAndDate(String userId) async => await habitsRepository.getByUserIdAndDate(db, userId);
+  Future<void> deleteHabit(String id) async => await habitsRepository.delete(db, id);
+
+  Future<void> saveHabitUser(String habitId, String userId) async => await habitUserRepository.save(db, habitId, userId);
+  Future<List<HabitUserModel>> getHabitUserByUserIdAndDate(String userId) async => await habitUserRepository.getByUserIdAndDate(db, userId);
+  Future<void> deleteHabitUser(String habitId, String userId) async => await habitUserRepository.delete(db, habitId, userId);
+
+  Future<Db?> get db async {
     if (_db != null) {
       return _db;
     }
@@ -33,21 +46,17 @@ class DbHelper {
     return _db;
   }
 
-  Future<Database> init() async {
-    io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    print('db path: ${documentsDirectory.path}');
-    String path = join(documentsDirectory.path, dbName);
+  Future<Db> init() async {
+    Db db = await Db.create(Constants.dbConnectionString);
+    await db.open();
 
     if (false) {
-      await deleteDatabase(path);
+      await db.dropCollection(UsersRepository.tableUsers);
+      await db.dropCollection(SessionsRepository.tableSessions);
+      await db.dropCollection(HabitsRepository.tableHabits);
+      await db.dropCollection(HabitUserRepository.tableHabitUser);
     }
 
-    var db = await openDatabase(path, version: version, onCreate: _onCreate);
     return db;
-  }
-
-  Future<void> _onCreate(Database db, int intVersion) async {
-    await usersRepository.createTable(db, intVersion);
-    await sessionsRepository.createTable(db, intVersion);
   }
 }

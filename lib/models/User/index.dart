@@ -10,7 +10,7 @@ class UserModel {
     id = const Uuid().v4();
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
